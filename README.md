@@ -1,4 +1,4 @@
-# AI Response Quality Evaluation System
+# Development of AI Response Validation System with Hallucination Detection Assistance
 ### Enterprise-Grade Frontend Platform for Infosys Springboard Internship
 
 A modern, cohesive enterprise AI observability and response quality evaluation platform. The system assesses AI-generated or user-submitted answers against a prompt and available reference evidence using an **LLM-as-a-Judge multi-agent architecture** combined with **FAISS vector search** (RAG).
