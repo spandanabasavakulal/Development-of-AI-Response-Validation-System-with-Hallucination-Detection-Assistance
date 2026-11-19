@@ -1,18 +1,27 @@
 
+from functools import lru_cache
+
 from sentence_transformers import SentenceTransformer
 import numpy as np
+
+
+@lru_cache(maxsize=1)
+def get_embedding_model():
+    print("Loading Sentence Transformer model...")
+
+    model = SentenceTransformer(
+        "sentence-transformers/all-MiniLM-L6-v2",
+        device="cpu"
+    )
+
+    print("Embedding model loaded successfully!")
+    return model
 
 
 class EmbeddingModel:
 
     def __init__(self):
-        print("Loading Sentence Transformer model...")
-
-        self.model = SentenceTransformer(
-            "sentence-transformers/all-MiniLM-L6-v2"
-        )
-
-        print("Embedding model loaded successfully!")
+        self.model = get_embedding_model()
 
     def generate_embeddings(self, texts):
 
@@ -23,7 +32,7 @@ class EmbeddingModel:
             texts,
             convert_to_numpy=True,
             normalize_embeddings=True,
-            show_progress_bar=True
+            show_progress_bar=False
         )
 
         return embeddings.astype(np.float32)
