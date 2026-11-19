@@ -212,7 +212,7 @@ export const EvaluationResultsPage: React.FC = () => {
           <div className="flex flex-wrap items-center gap-4 text-xs text-slate-600 pt-1">
             <span className="flex items-center gap-1.5 font-medium">
               <ShieldCheck className="w-4 h-4 text-brand-600" />
-              Factual Grounding Confidence: <strong className="text-slate-900">{evaluation.confidenceScore}%</strong>
+              Average Evaluation Score: <strong className="text-slate-900">{evaluation.confidenceScore}%</strong>
             </span>
             <span>•</span>
             <span className="flex items-center gap-1.5 font-medium">
@@ -247,7 +247,7 @@ export const EvaluationResultsPage: React.FC = () => {
             <StatusBadge status={evaluation.verdict} size="sm" />
           </div>
           <span className="text-[10px] text-slate-400 mt-2 font-mono">
-            4-Judge Weighted Composite
+            Four Specialist Judges + Verdict Aggregator
           </span>
         </div>
       </div>
