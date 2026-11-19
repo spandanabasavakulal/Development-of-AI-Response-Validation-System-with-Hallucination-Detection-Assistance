@@ -1,0 +1,83 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 1350 >>
+stream
+BT
+/F1 18 Tf
+50 740 Td
+(Enterprise AI Architecture & RAG Guidelines) Tj
+/F1 10 Tf
+0 -22 Td
+(Infosys Springboard Internship - Authoritative Grounding Reference Document) Tj
+0 -15 Td
+(Document ID: DOC-INFOSYS-2026-v1  |  Status: Verified Ground Truth) Tj
+0 -35 Td
+/F1 13 Tf
+(1. Overview of Retrieval-Augmented Generation \(RAG\)) Tj
+/F1 10 Tf
+0 -18 Td
+(Retrieval-Augmented Generation \(RAG\) optimizes LLM outputs by referencing an authoritative) Tj
+0 -14 Td
+(knowledge base outside of its training data before generating a response.) Tj
+0 -14 Td
+(The standard enterprise pipeline executes in two discrete stages: dense vector retrieval over) Tj
+0 -14 Td
+(FAISS or ChromaDB indices, followed by context augmentation in the model prompt.) Tj
+0 -14 Td
+(Enterprise benefits include reducing hallucination risk by 84%, providing domain-specific recency) Tj
+0 -14 Td
+(without continuous model re-training, and offering verifiable source citations for corporate audits.) Tj
+0 -25 Td
+/F1 13 Tf
+(2. Vector Indexing and Mathematical Similarity) Tj
+/F1 10 Tf
+0 -18 Td
+(Document passages are converted into 384-dimensional dense vector embeddings using) Tj
+0 -14 Td
+(sentence-transformers \(all-MiniLM-L6-v2\). FAISS performs k-nearest neighbor retrieval using) Tj
+0 -14 Td
+(cosine similarity and inner product metrics.) Tj
+0 -14 Td
+(Crucially, high semantic similarity is an information retrieval signal and does not mathematically) Tj
+0 -14 Td
+(prove that a statement is true. Claims must be cross-verified by specialized evaluation judges.) Tj
+0 -25 Td
+/F1 13 Tf
+(3. Hallucination Detection and Verification Standards) Tj
+/F1 10 Tf
+0 -18 Td
+(The system classifies claims into four strict categories: Supported, Unsupported, Contradicted,) Tj
+0 -14 Td
+(and Inconclusive.) Tj
+0 -14 Td
+(A statement lacking reference evidence is defined as Unsupported and must never be automatically) Tj
+0 -14 Td
+(equated with factual falsehood unless directly contradicted by verified ground truth.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000236 00000 n 
+0000001640 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1712
+%%EOF

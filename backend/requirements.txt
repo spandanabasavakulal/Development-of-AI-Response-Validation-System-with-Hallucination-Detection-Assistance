@@ -1,0 +1,17 @@
+
+fastapi
+uvicorn
+python-dotenv
+google-genai
+langgraph
+langchain
+langchain-google-genai
+datasets
+pandas
+numpy
+scikit-learn
+sentence-transformers
+faiss-cpu
+pymupdf
+pydantic
+python-multipart

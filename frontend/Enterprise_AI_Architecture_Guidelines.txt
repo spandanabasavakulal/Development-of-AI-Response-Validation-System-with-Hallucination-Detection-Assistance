@@ -1,0 +1,30 @@
+================================================================================
+ENTERPRISE AI ARCHITECTURE & RAG GUIDELINES (DOCUMENT ID: DOC-INFOSYS-2026-v1)
+Infosys Springboard Internship - Authoritative Ground Truth Document
+================================================================================
+
+1. OVERVIEW OF RETRIEVAL-AUGMENTED GENERATION (RAG)
+Retrieval-Augmented Generation (RAG) optimizes LLM outputs by referencing an authoritative
+knowledge base outside of its training data before generating a response.
+The standard enterprise pipeline executes in two discrete stages:
+  - Stage 1: Dense vector retrieval over FAISS or ChromaDB indices.
+  - Stage 2: Context augmentation in the prompt passed to the inference model.
+Enterprise benefits include reducing hallucination risk by 84%, providing domain-specific recency
+without continuous model re-training, and offering verifiable source citations for corporate audits.
+
+2. VECTOR INDEXING AND MATHEMATICAL SIMILARITY
+Document passages are converted into 384-dimensional dense vector embeddings using
+sentence-transformers (all-MiniLM-L6-v2). FAISS performs k-nearest neighbor retrieval using
+cosine similarity and inner product metrics.
+Crucially, high semantic similarity is an information retrieval signal and does not mathematically
+prove that a statement is true. Claims must be cross-verified by specialized evaluation judges.
+
+3. HALLUCINATION DETECTION AND VERIFICATION STANDARDS
+The system classifies claims into four strict categories:
+  - Supported: The evidence directly agrees with the statement.
+  - Unsupported: No sufficient supporting passage was found; this alone does not prove the claim is false.
+  - Contradicted: Reliable evidence conflicts with the claim.
+  - Inconclusive: Evidence is missing, ambiguous, or insufficient.
+A statement lacking reference evidence is defined as Unsupported and must never be automatically
+equated with factual falsehood unless directly contradicted by verified ground truth.
+================================================================================
