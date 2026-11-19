@@ -1,23 +1,22 @@
 
 import os
-import json
 from pathlib import Path
-from rag.vector_store import FAISSVectorStore
-from dotenv import dotenv_values
+from dotenv import load_dotenv
 from google import genai
-from utils.gemini_retry import generate_content_with_retry
-
-# Load backend environment variables
+from rag.vector_store import FAISSVectorStore
+# Load environment configuration
 BASE_DIR = Path(__file__).resolve().parent.parent
-config = dotenv_values(BASE_DIR / ".env")
 
-API_KEY = config.get("GEMINI_API_KEY")
-MODEL =  "gemini-3.5-flash-lite"
+load_dotenv(BASE_DIR / ".env")
+
+API_KEY = os.getenv("GEMINI_API_KEY")
+MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash-lite")
 
 if not API_KEY:
-    raise ValueError("GEMINI_API_KEY is missing from backend/.env")
+    raise ValueError("GEMINI_API_KEY is not configured")
 
 client = genai.Client(api_key=API_KEY)
+
 # Initialize FAISS vector store
 vector_store = FAISSVectorStore()
 vector_store.load_index()
