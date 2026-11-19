@@ -10,6 +10,13 @@
 </p>
 
 ---
+## 🚀 Live Demo
+
+Experience the deployed AI Eval Sentinel application:
+
+**[Launch AI Eval Sentinel](https://development-of-ai-response-validati-mu.vercel.app/)**
+
+The application is deployed using Vercel (Frontend) and Render (Backend).
 
 ## 1. Project Overview
 
