@@ -8,8 +8,8 @@ try:
     from .document_loader import load_all_documents
     from .embeddings import EmbeddingModel
 except ImportError:
-    from document_loader import load_all_documents
-    from embeddings import EmbeddingModel
+    from .document_loader import load_all_documents
+    from .embeddings import EmbeddingModel
 
 
 BASE_DIR = Path(__file__).resolve().parents[1]
