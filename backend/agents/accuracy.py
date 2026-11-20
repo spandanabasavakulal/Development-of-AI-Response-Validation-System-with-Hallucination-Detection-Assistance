@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from dotenv import load_dotenv
 from google import genai
-from rag.vector_store import FAISSVectorStore
+from rag.vector_store import get_vector_store
 from utils.gemini_retry import generate_content_with_retry
 
 # Load environment configuration
@@ -21,8 +21,7 @@ if not API_KEY:
 client = genai.Client(api_key=API_KEY)
 
 # Initialize FAISS vector store
-vector_store = FAISSVectorStore()
-vector_store.load_index()
+vector_store = get_vector_store()
 
 def retrieve_evidence(question, top_k=5):
 
@@ -45,6 +44,7 @@ def retrieve_evidence(question, top_k=5):
 
     return "\n\n".join(evidence_parts)
 
+
 def evaluate_accuracy(
     question: str,
     ai_response: str,
@@ -52,18 +52,17 @@ def evaluate_accuracy(
     evidence: str = None
 ):
     """
-    Evaluate the factual accuracy of an AI-generated response.
-
-    Returns:
-        A dictionary containing the accuracy score,
-        verdict, explanation, and supporting evidence.
+    Evaluate factual accuracy using reference answers
+    and retrieved FAISS evidence.
     """
+
+    if evidence is None:
+        evidence = retrieve_evidence(question)
 
     prompt = f"""
 You are an expert AI Accuracy Judge Agent.
 
-Your task is to evaluate the factual accuracy of an
-AI-generated response.
+Evaluate the factual accuracy of the AI-generated response.
 
 USER QUESTION:
 {question}
@@ -81,7 +80,7 @@ EVALUATION RULES:
 
 1. Compare factual claims against the available reference
    answer and retrieved evidence.
-2. Do not assume that unsupported claims are true.
+2. Do not assume unsupported claims are true.
 3. Identify incorrect or contradictory claims.
 4. If evidence is insufficient, do not invent facts.
 5. Distinguish factual errors from missing information.
@@ -90,7 +89,7 @@ EVALUATION RULES:
 7. If evidence is insufficient, use null for the score
    and verdict INSUFFICIENT_EVIDENCE.
 
-Return ONLY valid JSON in this format:
+Return ONLY valid JSON:
 
 {{
     "accuracy_score": 0,
@@ -127,6 +126,7 @@ Allowed verdicts:
         )
 
     return result
+
 
 
 if __name__ == "__main__":

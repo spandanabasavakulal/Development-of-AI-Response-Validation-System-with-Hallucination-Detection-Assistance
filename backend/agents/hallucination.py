@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from dotenv import load_dotenv
 from google import genai
-from rag.vector_store import FAISSVectorStore
+from rag.vector_store import get_vector_store
 from utils.gemini_retry import generate_content_with_retry
 
 # Load environment configuration
@@ -21,8 +21,7 @@ client = genai.Client(api_key=API_KEY)
 
 
 # Initialize FAISS
-vector_store = FAISSVectorStore()
-vector_store.load_index()
+vector_store = get_vector_store()
 
 
 def retrieve_evidence(question, top_k=5):

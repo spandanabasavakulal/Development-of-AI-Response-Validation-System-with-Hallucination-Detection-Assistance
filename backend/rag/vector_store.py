@@ -3,6 +3,7 @@ import faiss
 import json
 import numpy as np
 from pathlib import Path
+from functools import lru_cache
 
 try:
     from .document_loader import load_all_documents
@@ -20,6 +21,16 @@ VECTOR_DIR.mkdir(parents=True, exist_ok=True)
 INDEX_PATH = VECTOR_DIR / "evidence.index"
 METADATA_PATH = VECTOR_DIR / "metadata.json"
 
+@lru_cache(maxsize=1)
+def get_vector_store():
+    """Return one shared FAISS vector store instance."""
+
+    print("Initializing shared FAISS vector store...")
+
+    store = FAISSVectorStore()
+    store.load_index()
+
+    return store
 
 class FAISSVectorStore:
 
