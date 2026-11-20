@@ -9,18 +9,16 @@ export interface ApiStatus {
 }
 
 export const getApiStatus = async (): Promise<ApiStatus> => {
+  const controller = new AbortController();
+
+  const timeoutId = setTimeout(() => {
+    controller.abort();
+  }, 65000);
+
   try {
-    const controller = new AbortController();
-
-    const timeoutId = setTimeout(() => {
-      controller.abort();
-    }, 1200);
-
     const response = await fetch(`${API_BASE_URL}/health`, {
       signal: controller.signal,
     });
-
-    clearTimeout(timeoutId);
 
     if (response.ok) {
       return {
@@ -30,7 +28,9 @@ export const getApiStatus = async (): Promise<ApiStatus> => {
       };
     }
   } catch (error) {
-    // Backend connection failed.
+    console.error('Backend health check failed:', error);
+  } finally {
+    clearTimeout(timeoutId);
   }
 
   return {
